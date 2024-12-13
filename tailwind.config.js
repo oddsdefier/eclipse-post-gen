@@ -12,7 +12,8 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				gt: ['GT Alpina Trial', 'sans-serif']
+				gt: ['GT Alpina Trial', 'sans-serif'],
+				oswald: ['Oswald', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
