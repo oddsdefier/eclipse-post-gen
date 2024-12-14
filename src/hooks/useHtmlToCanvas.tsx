@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Slider } from "@/components/ui/slider";
 
 interface TextBlock {
 	text: string;
@@ -152,7 +153,8 @@ export default function HtmlToCanvas() {
 									</div>
 									<div>
 										<Label>Font Size (rem)</Label>
-										<Input type="number" value={block.fontSize} onChange={(e) => updateTextBlock(index, "fontSize", Number(e.target.value))} />
+										<Slider min={1} max={20} step={0.1} value={[block.fontSize]} onValueChange={(value) => updateTextBlock(index, "fontSize", value[0])} />
+										<div className="mt-1 text-sm text-gray-500">{block.fontSize.toFixed(1)} rem</div>
 									</div>
 									<div>
 										<Label>Font Style</Label>
@@ -180,7 +182,8 @@ export default function HtmlToCanvas() {
 									</div>
 									<div>
 										<Label>Letter Spacing (px)</Label>
-										<Input type="number" value={block.letterSpacing === 0 ? "" : block.letterSpacing} onChange={(e) => updateTextBlock(index, "letterSpacing", e.target.value === "" ? 0 : Number(e.target.value))} />
+										<Slider min={-20} max={20} step={0.5} value={[block.letterSpacing]} onValueChange={(value) => updateTextBlock(index, "letterSpacing", value[0])} />
+										<div className="mt-1 text-sm text-gray-500">{block.letterSpacing.toFixed(1)} px</div>
 									</div>
 									<div>
 										<Label>Font Family</Label>
@@ -196,11 +199,13 @@ export default function HtmlToCanvas() {
 									</div>
 									<div>
 										<Label>Line Height</Label>
-										<Input type="number" value={block.lineHeight === 0 ? "" : block.lineHeight} onChange={(e) => updateTextBlock(index, "lineHeight", e.target.value === "" ? 0 : Number(e.target.value))} />
+										<Slider min={0.5} max={3} step={0.1} value={[block.lineHeight]} onValueChange={(value) => updateTextBlock(index, "lineHeight", value[0])} />
+										<div className="mt-1 text-sm text-gray-500">{block.lineHeight.toFixed(1)}</div>
 									</div>
 									<div>
 										<Label>Padding Y (px)</Label>
-										<Input type="number" value={block.paddingY === 0 ? "" : block.paddingY} onChange={(e) => updateTextBlock(index, "paddingY", e.target.value === "" ? 0 : Number(e.target.value))} />
+										<Slider min={0} max={100} step={1} value={[block.paddingY]} onValueChange={(value) => updateTextBlock(index, "paddingY", value[0])} />
+										<div className="mt-1 text-sm text-gray-500">{block.paddingY} px</div>
 									</div>
 									<div className="flex justify-end">
 										<Button onClick={() => deleteTextBlock(index)} className="mt-4 bg-red-500 text-white">
