@@ -245,7 +245,7 @@ const HtmlToCanvas = () => {
 	const textBlocksDisplay = useMemo(
 		() => (
 			<div
-				className="h-full w-full flex flex-col justify-center items-start px-5"
+				className="h-full w-full flex flex-col justify-center items-center px-5"
 				style={{
 					contain: "layout paint",
 					fontFeatureSettings: '"kern" 1', // Enable kerning
@@ -261,7 +261,7 @@ const HtmlToCanvas = () => {
 
 	return (
 		<div className="relative w-full min-h-screen container mx-auto overflow-hidden">
-			<div id="capture" className="absolute z-0 top-0 left-0 right-0 p-10 font-gt flex justify-center items-center w-[1200px] h-[675px]" style={{ contain: "layout paint" }}>
+			<div id="capture" className="absolute z-0 top-0 left-0 right-0 p-5 font-gt flex justify-center items-center w-[1200px] h-[675px]" style={{ contain: "layout paint" }}>
 				{textBlocksDisplay}
 			</div>
 			<div className="bg-white z-20 w-full min-h-screen relative pt-[calc(100vw*9/16)] sm:pt-[28rem] pb-16 px-4 sm:px-6">
@@ -278,6 +278,7 @@ const HtmlToCanvas = () => {
 				</Accordion>
 
 				<div className="flex flex-wrap gap-4 mt-6">
+					<p className="font-gt">ePost</p>
 					<Button onClick={addNewTextBlock}>Add New Text Block</Button>
 					<Button onClick={saveAsPng}>Save as PNG</Button>
 				</div>
