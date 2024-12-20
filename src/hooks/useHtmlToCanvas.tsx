@@ -264,7 +264,6 @@ const HtmlToCanvas = () => {
 			<div id="capture" className="absolute z-0 top-0 left-0 right-0 p-10 font-gt flex justify-center items-center w-[1200px] h-[675px]" style={{ contain: "layout paint" }}>
 				{textBlocksDisplay}
 			</div>
-			<div className="absolute top-0 left-0 right-0 bottom-0 w-screen h-screen bg-green-500 opacity-100 z-10"></div>
 			<div className="bg-white z-20 w-full min-h-screen relative pt-[calc(100vw*9/16)] sm:pt-[28rem] pb-16 px-4 sm:px-6">
 				{dataUrl && <TwitterPreview dataUrl={dataUrl} />}
 				<Accordion type="multiple" className="w-full mt-4">
