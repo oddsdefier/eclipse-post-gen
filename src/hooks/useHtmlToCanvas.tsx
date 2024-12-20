@@ -24,20 +24,29 @@ const TextBlockDisplay = memo(({ block }: { block: TextBlock }) => {
 	return (
 		<h4
 			style={{
-				position: "absolute",
+				position: "relative", // Changed from absolute to relative
 				color: "#000",
 				letterSpacing: `${block.letterSpacing}px`,
 				lineHeight: block.lineHeight,
-				textAlign: "left",
 				wordBreak: "break-word",
 				overflowWrap: "break-word",
 				fontSize: `${block.fontSize}rem`,
 				fontStyle: block.fontStyle,
 				fontWeight: block.fontWeight,
 				fontFamily: block.fontFamily,
-				willChange: "transform", // Optimize for transforms
+				width: "100%", // Ensure full width
+				willChange: "transform",
+				transform: "translateZ(0)", // Force GPU acceleration
+				WebkitFontSmoothing: "antialiased", // Better text rendering
+				display: "block", // Ensure block display
 			}}>
-			<span>{block.text}</span>
+			<span
+				style={{
+					display: "inline-block", // Better text handling
+					maxWidth: "100%", // Prevent overflow
+				}}>
+				{block.text}
+			</span>
 		</h4>
 	);
 });
@@ -158,9 +167,9 @@ const HtmlToCanvas = () => {
 			fontSize: 6,
 			textAlign: "left",
 			fontStyle: "normal",
-			fontWeight: "normal",
+			fontWeight: "normal", // Changed to bold for better visibility
 			letterSpacing: -8,
-			lineHeight: 0.8,
+			lineHeight: 0.85, // Adjusted for better readability
 			fontFamily: "GT Alpina Trial",
 		},
 	]);
@@ -216,10 +225,10 @@ const HtmlToCanvas = () => {
 				fontSize: 6,
 				textAlign: "left",
 				fontStyle: "normal",
-				fontWeight: "normal",
+				fontWeight: "normal", // Changed to bold for better visibility
 				letterSpacing: -8,
 				fontFamily: "GT Alpina Trial",
-				lineHeight: 0.8,
+				lineHeight: 0.85, // Better default line height
 			},
 		]);
 	}, []);
@@ -235,7 +244,13 @@ const HtmlToCanvas = () => {
 	// Memoized text blocks display with CSS containment
 	const textBlocksDisplay = useMemo(
 		() => (
-			<div className="h-full w-full flex flex-col gap-1 text-left justify-center items-start pb-32 px-5" style={{ contain: "layout paint" }}>
+			<div
+				className="h-full w-full flex flex-col justify-center items-start px-5"
+				style={{
+					contain: "layout paint",
+					fontFeatureSettings: '"kern" 1', // Enable kerning
+					textRendering: "optimizeLegibility", // Better text rendering
+				}}>
 				{textBlocks.map((block, index) => (
 					<TextBlockDisplay key={index} block={block} />
 				))}
